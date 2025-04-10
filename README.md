@@ -1,79 +1,91 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Oculis - Eye Care Application
 
-# Getting Started
+Oculis is a mobile application designed to help users maintain good eye health by providing guided eye exercises, tracking eye health metrics, and encouraging healthy screen time habits.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+### 1. Eye Exercises
+- **Eye Rotation**: Guided exercises for strengthening eye muscles
+- **Blinking Exercises**: Timed exercises to prevent dry eyes
+- **Full Exercise Routine**: Complete set of eye exercises in sequence
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### 2. Health Tracking
+- **Eye Health Score**: Monitor your overall eye health 
+- **Blink Gap**: Track how often you blink when using screens
+- **App Usage Time**: Monitor your daily screen time
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### 3. Customizable Settings
+- **Work Time Settings**: Customize work periods between breaks
+- **Exercise Duration**: Adjust duration of each exercise type
+- **Exercise Cycles**: Set the number of exercise cycles
 
-```bash
-# using npm
-npm start
+## Getting Started
 
-# OR using Yarn
-yarn start
+### Prerequisites
+- Node.js 
+- npm or yarn
+- React Native development environment
+
+### Installation
+
+1. Clone the repository:
+```
+git clone [repository-url]
 ```
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+2. Install dependencies:
+```
+cd Oculis
+npm install
 ```
 
-### For iOS
+3. For iOS, install pods:
+```
+cd ios && pod install && cd ..
+```
 
-```bash
-# using npm
+### Running the App
+
+For iOS:
+```
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+For Android:
+```
+npm run android
+```
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Project Structure
 
-## Step 3: Modifying your App
+```
+/Componenets
+  /screens        # Main application screens
+  /Cards          # Reusable card components
+  /navigation     # Navigation configuration
+  /context        # App state management
+```
 
-Now that you have successfully run the app, let's modify it.
+## Technologies Used
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+- React Native
+- TypeScript
+- React Navigation
+- React Native SVG (for eye tracking exercises)
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Future Enhancements
 
-## Congratulations! :tada:
+- Notification reminders for taking eye breaks
+- Statistics dashboard with charts
+- User profiles to track multiple users
+- Eye exercise history and progress tracking
+- Integration with health apps
 
-You've successfully run and modified your React Native App. :partying_face:
+## License
 
-### Now what?
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+## Acknowledgements
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Icons and graphics designed specifically for Oculis
+- Eye exercise techniques based on vision therapy practices
