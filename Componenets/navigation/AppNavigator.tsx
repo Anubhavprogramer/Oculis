@@ -8,6 +8,7 @@ import MainScreen from '../screens/MainScreen';
 import ExerciseIntro from '../screens/ExerciseIntro';
 import BlinkExercise from '../screens/BlinkExercise';
 import EyeRotation from '../screens/EyeRotation';
+import SettingsScreen from '../screens/SettingsScreen';
 
 // Define the navigator parameter list
 export type RootStackParamList = {
@@ -16,6 +17,7 @@ export type RootStackParamList = {
   ExerciseIntro: undefined;
   BlinkExercise: undefined;
   EyeRotation: undefined;
+  Settings: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -35,6 +37,7 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen name="ExerciseIntro" component={ExerciseIntro} />
         <Stack.Screen name="BlinkExercise" component={BlinkExercise} />
         <Stack.Screen name="EyeRotation" component={EyeRotation} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

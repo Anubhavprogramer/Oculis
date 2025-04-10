@@ -36,12 +36,19 @@ const MainScreen: React.FC = () => {
   const handleStartEyeRotation = () => {
     navigation.navigate('EyeRotation');
   };
+  
+  const handleSettingsPress = () => {
+    navigation.navigate('Settings');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Oculis</Text>
-        <TouchableOpacity style={styles.settingsButton}>
+        <TouchableOpacity 
+          style={styles.settingsButton}
+          onPress={handleSettingsPress}
+        >
           <Text style={styles.settingsIcon}>⚙️</Text>
         </TouchableOpacity>
       </View>
