@@ -16,7 +16,7 @@ const WelcomeScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const handleGetStarted = () => {
-    navigation.navigate('Main');
+    navigation.navigate('MainTabs');
   };
 
   return (
@@ -24,7 +24,7 @@ const WelcomeScreen: React.FC = () => {
       <View style={styles.content}>
         <GlassesIcon />
         
-        <Text style={styles.title}>Welcome to Eye Care!</Text>
+        <Text style={styles.title}>Welcome to EyeCare Pro!</Text>
         
         <Text style={styles.subtitle}>
           Improve your eye health with simple exercises and keep your vision sharp.

@@ -22,7 +22,7 @@ const ClockIcon = () => (
   </View>
 );
 
-const MainScreen: React.FC = () => {
+const HomeScreen: React.FC = () => {
   const navigation = useNavigation();
 
   const handleStartFullExercise = () => {
@@ -59,14 +59,20 @@ const MainScreen: React.FC = () => {
   // Handler for exercise card press
   const handleExercisePress = (exerciseId: string) => {
     switch (exerciseId) {
+      case 'quick':
+        navigation.navigate('QuickExercise');
+        break;
       case 'eyeRolling':
-        handleStartEyeRotation();
+        navigation.navigate('EyeRolling');
+        break;
+      case 'focusing':
+        navigation.navigate('Focusing');
         break;
       case 'blinkPractice':
-        handleStartBlinking();
+        navigation.navigate('BlinkExercise');
         break;
       default:
-        handleStartFullExercise();
+        navigation.navigate('ExerciseIntro');
         break;
     }
   };
@@ -88,85 +94,96 @@ const MainScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Oculis</Text>
-        <TouchableOpacity 
-          style={styles.settingsButton}
-          onPress={handleSettingsPress}
-        >
-          <Text style={styles.settingsIcon}>⚙️</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Track Your Work Card */}
-      <View style={styles.trackCard}>
-        <Text style={styles.cardTitle}>Track Your Work</Text>
-        <View style={styles.timerContainer}>
-          <View style={styles.timer}>
-            <Text style={styles.timerText}>30 : 0</Text>
-          </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>EyeCare Pro</Text>
+          <TouchableOpacity 
+            style={styles.settingsButton}
+            onPress={handleSettingsPress}
+          >
+            <Text style={styles.settingsIcon}>⚙️</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.playButton}>
-          <PlayIcon />
-        </TouchableOpacity>
-      </View>
 
-      {/* Health Score Card */}
-      <View style={styles.healthCard}>
-        <View style={styles.scoreContainer}>
-          <View style={styles.scoreCircle}>
-            <Text style={styles.scoreText}>0</Text>
+        {/* Track Your Work Card */}
+        <View style={styles.trackCard}>
+          <Text style={styles.cardTitle}>Track Your Work</Text>
+          <View style={styles.timerContainer}>
+            <View style={styles.timer}>
+              <Text style={styles.timerText}>30 : 0</Text>
+            </View>
           </View>
-          <View style={styles.scoreInfo}>
-            <Text style={styles.healthTitle}>Health Score</Text>
-            <Text style={styles.healthStatus}>Poor! Take care of your eyes ASAP.</Text>
-            
-            <View style={styles.statsRow}>
-              <View style={styles.statItem}>
-                <EyeIcon />
-                <Text style={styles.statLabel}>Blink Gap</Text>
-                <Text style={styles.statValue}>2 sec</Text>
+          <TouchableOpacity style={styles.playButton}>
+            <PlayIcon />
+          </TouchableOpacity>
+        </View>
+
+        {/* Health Score Card */}
+        <View style={styles.healthCard}>
+          <Text style={styles.cardTitle}>Health Score</Text>
+          <View style={styles.scoreContainer}>
+            <View style={styles.scoreCircleWrapper}>
+              <View style={styles.scoreCircle}>
+                <Text style={styles.scoreText}>78</Text>
+                <Text style={styles.scorePercent}>%</Text>
               </View>
+              <Text style={styles.scoreLabel}>Good</Text>
+            </View>
+            <View style={styles.scoreInfo}>
+              <Text style={styles.healthTip}>Keep it up! Your eyes are healthier than last week.</Text>
               
-              <View style={styles.statItem}>
-                <ClockIcon />
-                <Text style={styles.statLabel}>App Time</Text>
-                <Text style={styles.statValue}>0 hrs</Text>
+              <View style={styles.statsRow}>
+                <View style={styles.statItem}>
+                  <EyeIcon />
+                  <Text style={styles.statLabel}>Blink Rate</Text>
+                  <Text style={styles.statValue}>15/min</Text>
+                </View>
+                
+                <View style={styles.statItem}>
+                  <ClockIcon />
+                  <Text style={styles.statLabel}>Screen Time</Text>
+                  <Text style={styles.statValue}>2.5 hrs</Text>
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
 
-      {/* Exercises Section */}
-      <View style={styles.exercisesSection}>
-        <Text style={styles.sectionTitle}>Exercises</Text>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.exercisesScrollContainer}
-        >
-          {exercises.map((exercise) => (
-            <TouchableOpacity
-              key={exercise.id}
-              style={styles.exerciseCard}
-              onPress={() => handleExercisePress(exercise.id)}
-            >
-              <View style={styles.exerciseHeader}>
-                <Text style={styles.exerciseTitle}>{exercise.title}</Text>
-                {renderDifficultyTag(exercise.difficulty)}
-              </View>
-              <Text style={styles.exerciseDuration}>{exercise.duration}</Text>
+        {/* Exercises Section */}
+        <View style={styles.exercisesSection}>
+          <Text style={styles.sectionTitle}>Exercises</Text>
+          <View style={styles.exercisesGrid}>
+            {exercises.map((exercise) => (
               <TouchableOpacity
-                style={styles.startButton}
+                key={exercise.id}
+                style={styles.exerciseCard}
                 onPress={() => handleExercisePress(exercise.id)}
               >
-                <Text style={styles.startButtonText}>Start</Text>
+                <View style={styles.exerciseCardContent}>
+                  <View style={styles.exerciseHeader}>
+                    <Text style={styles.exerciseTitle}>{exercise.title}</Text>
+                    {renderDifficultyTag(exercise.difficulty)}
+                  </View>
+                  
+                  <View style={styles.exerciseIconPlaceholder}>
+                    <Text style={styles.exerciseIconText}>{exercise.title.charAt(0)}</Text>
+                  </View>
+                  
+                  <View style={styles.exerciseDetails}>
+                    <Text style={styles.exerciseDuration}>{exercise.duration}</Text>
+                    <TouchableOpacity
+                      style={styles.startButton}
+                      onPress={() => handleExercisePress(exercise.id)}
+                    >
+                      <Text style={styles.startButtonText}>Start</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </TouchableOpacity>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+            ))}
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -199,6 +216,11 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 15,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
   cardTitle: {
     fontSize: 24,
@@ -252,36 +274,56 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 20,
     marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
   scoreContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  scoreCircleWrapper: {
+    alignItems: 'center',
+    marginRight: 20,
   },
   scoreCircle: {
     width: 100,
     height: 100,
     borderRadius: 50,
     borderWidth: 5,
-    borderColor: '#000',
+    borderColor: '#4CAF50',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 20,
+    backgroundColor: 'rgba(76, 175, 80, 0.1)',
+    flexDirection: 'row',
   },
   scoreText: {
     fontSize: 40,
     fontWeight: 'bold',
+    color: '#4CAF50',
+  },
+  scorePercent: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#4CAF50',
+    alignSelf: 'flex-start',
+    marginTop: 10,
+  },
+  scoreLabel: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    color: '#4CAF50',
   },
   scoreInfo: {
     flex: 1,
   },
-  healthTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  healthStatus: {
+  healthTip: {
     fontSize: 16,
-    marginBottom: 20,
+    marginBottom: 15,
+    lineHeight: 22,
   },
   statsRow: {
     flexDirection: 'row',
@@ -289,6 +331,10 @@ const styles = StyleSheet.create({
   },
   statItem: {
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    borderRadius: 12,
+    padding: 10,
+    minWidth: 90,
   },
   eyeIcon: {
     marginBottom: 5,
@@ -341,56 +387,82 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 15,
   },
-  exercisesScrollContainer: {
-    paddingRight: 20,
+  exercisesGrid: {
+    flexDirection: 'column',
   },
   exerciseCard: {
     backgroundColor: '#E8ECC5',
     borderRadius: 20,
+    marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    overflow: 'hidden',
+  },
+  exerciseCardContent: {
     padding: 15,
-    marginRight: 12,
-    width: 180,
-    justifyContent: 'space-between',
   },
   exerciseHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 15,
   },
   exerciseTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     flex: 1,
   },
   difficultyTag: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    marginLeft: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 15,
   },
   difficultyText: {
     color: 'white',
     fontSize: 12,
     fontWeight: 'bold',
   },
+  exerciseIconPlaceholder: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  exerciseIconText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  exerciseDetails: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   exerciseDuration: {
     fontSize: 16,
-    marginBottom: 15,
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 10,
   },
   startButton: {
     backgroundColor: '#000',
     borderRadius: 20,
-    padding: 12,
-    alignItems: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 20,
   },
   startButtonText: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
 
-export default MainScreen; 
+export default HomeScreen; 
